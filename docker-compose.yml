@@ -1,0 +1,18 @@
+services:
+  deep-learning:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    working_dir: /lab
+    volumes:
+      - ./src:/lab
+    ports:
+      - "8888:8888"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [ gpu ]
